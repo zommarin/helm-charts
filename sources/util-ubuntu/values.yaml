@@ -1,0 +1,18 @@
+---
+#
+# Values for the util-ubuntu pods
+#
+
+image: ubuntu:22.04
+
+limits:
+  cpu: '1000m'
+  memory: '1Gi'
+
+replicas: 1
+
+# Deploy as a daemonset on all nodes
+daemonset: false
+
+# Run with host networking
+hostNetworking: false

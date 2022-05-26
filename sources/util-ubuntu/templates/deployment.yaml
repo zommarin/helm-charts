@@ -3,11 +3,17 @@
 # The pod
 #
 apiVersion: apps/v1
+  {{ if .Values.daemonset }}
+kind: DaemonSet
+  {{ else }}
 kind: Deployment
+  {{ end }}
 metadata:
   name: ubuntu-util
 spec:
-  replicas: 1
+  {{ if not .Values.daemonset }}
+  replicas: {{ .Values.replicas }}
+  {{ end }}
   selector:
     matchLabels:
       app: ubuntu-util
@@ -16,13 +22,16 @@ spec:
       labels:
         app: ubuntu-util
     spec:
+{{ if .Values.hostNetworking }}
+      hostNetwork: true
+{{ end }}
       containers:
-        - name: postgres
-          image: unumtu:22.04
+        - name: util
+          image: {{ .Values.image }}
           resources:
             limits:
-              cpu: 1000m
-              memory: 1Gi
+              cpu: {{ .Values.limits.cpu }}
+              memory: {{ .Values.limits.memory }}
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: '100m'
+              memory: '128Mi'
