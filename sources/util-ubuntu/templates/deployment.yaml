@@ -1,0 +1,28 @@
+---
+#
+# The pod
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-util
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu-util
+  template:
+    metadata:
+      labels:
+        app: ubuntu-util
+    spec:
+      containers:
+        - name: postgres
+          image: unumtu:22.04
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi

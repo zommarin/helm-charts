@@ -1,0 +1,11 @@
+---
+#
+# Description of the helm chart for Ubuntu util pods
+#
+apiVersion: v2
+name: util-ubuntu
+description: Deploys ubuntu pods for utility action
+
+type: application
+version: 0.1.0
+appVersion: "22.04"
