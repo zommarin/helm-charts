@@ -8,7 +8,7 @@ helm-lint:
 
 .PHONY: helm-package
 helm-package:
-	helm package sources/*
+	helm package --destination releases sources/*
 
 .PHONY: helm-repo-index
 helm-repo-index:
